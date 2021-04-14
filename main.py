@@ -22,14 +22,25 @@ def draw():
   screen.draw.line((0, 50), (WIDTH, 50), "black")
   screen.draw.line((0, 100), (WIDTH, 100), "black")
 
+  for y, row in enumerate(positions):
+    for x, a in enumerate(row):
+      if a is None:
+        continue
+      else:
+        a.topleft = (x*50, y*50)
+        a.draw()
+
 def update():
   pass
 
 def changeTurn(x, y):
   global turn
-  if positions[y][x] is not None:
+  if positions[x][y] is not None:
       return
-  positions[y][x] = turn
+  if turn == True:
+    positions[x][y] = Actor('x')
+  else:
+    positions[x][y] = Actor('o')
   turn = not(turn)
   print(positions)
 
